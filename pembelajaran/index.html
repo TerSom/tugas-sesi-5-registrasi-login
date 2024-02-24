@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SESI 5 CUY UNEVERSITY</title>
+    <link rel="stylesheet" href="style.css">
+<body>
+    <div id="container">
+        <div class="isi">
+            <div>
+                <input  type="text" placeholder="username" id="usernameInput" />
+                <input  type="password" placeholder="password" id="passwordInput" />
+            </div>
+            <div>
+                <button class="btn" onclick="onLogin()" id="loginButton">LOGIN</button>
+                <button class="btn" onclick="onLogout()" id="logoutButton">LOGOUT</button>
+                <button class="btn" onclick="onRegister()" id="logoutButton">REGISTER</button>
+            </div>
+            <br>
+            <h1 id="admin">LOGIN SEBAGAI ADMIN</h1>
+            <h1 id="basic">LOGIN SEBAGAI USER BIASA</h1>
+            <h1 id="boss">LOGIN SEBAGAI BOSS</h1>
+        </div>
+        <div class="img-isi">
+            <img id="basicImg" src="assets/img/customer.png" alt="">
+            <img id="adminImg" src="assets/img/admin.png" alt="">
+            <img id="bossImg" src="assets/img/boss.png" alt="">
+        </div>
+    </div>
+    
+    <script type="application/javascript">
+
+        let usernameInput = document.getElementById("usernameInput")
+        let passwordInput = document.getElementById("passwordInput")
+        let loginButton = document.getElementById("loginButton")
+        let logoutButton = document.getElementById("logoutButton")
+        let admin = document.getElementById("admin")
+        let basic = document.getElementById("basic")
+        let boss = document.getElementById("boss")
+        let adminImg = document.getElementById("adminImg")
+        let basicImg = document.getElementById("basicImg")
+        let bossImg = document.getElementById("bossImg")
+
+        admin.style.display = "none"
+        basic.style.display = "none"
+        boss.style.display = "none"
+        adminImg.style.display = "none"
+        basicImg.style.display = "none"
+        bossImg.style.display = "none"
+        logoutButton.style.display = "none"
+
+        function onLogin(){
+            localStorage.setItem("username",usernameInput.value)
+            localStorage.setItem("password",passwordInput.value)
+            logoutButton.style.display = "block"
+            
+            if(usernameInput.value == "admin" && passwordInput.value == "admin123"){
+                localStorage.setItem("role","admin")
+                usernameInput.style.display = "none"
+                passwordInput.style.display = "none"
+                loginButton.style.display = "none"
+                admin.style.display = "block"
+                basic.style.display = "none"
+                boss.style.display = "none"
+                adminImg.style.display = "block"
+                basicImg.style.display = "none"
+                bossImg.style.display = "none"
+            }else if(usernameInput.value == "boss" && passwordInput.value == "boss123"){
+                localStorage.setItem("role","boss")
+                usernameInput.style.display = "none"
+                passwordInput.style.display = "none"
+                loginButton.style.display = "none"
+                boss.style.display = "block"
+                admin.style.display = "none"
+                basic.style.display = "none"
+                adminImg.style.display = "none"
+                basicImg.style.display = "none"
+                bossImg.style.display = "block"
+            }else{  
+                localStorage.setItem("role","basic")
+                usernameInput.style.display = "none"
+                passwordInput.style.display = "none"
+                loginButton.style.display = "none"
+                basic.style.display = "block"
+                admin.style.display = "none"
+                boss.style.display = "none"
+                adminImg.style.display = "none"
+                basicImg.style.display = "block"
+                bossImg.style.display = "none"
+            }
+        }
+        
+        if(localStorage.getItem("username")){
+            usernameInput.style.display = "none"
+            passwordInput.style.display = "none"
+            loginButton.style.display = "none"
+            logoutButton.style.display = "block"
+            if(localStorage.getItem("role") == "admin"){
+                admin.style.display = "block"
+                basic.style.display = "none"
+                boss.style.display = "none"
+                adminImg.style.display = "block"
+                basicImg.style.display = "none"
+                bossImg.style.display = "none"
+            }else if(localStorage.getItem("role") == "boss"){
+                boss.style.display = "block"
+                basic.style.display = "none"
+                admin.style.display = "none"
+                adminImg.style.display = "none"
+                basicImg.style.display = "none"
+                bossImg.style.display = "block"
+            }else{
+                basic.style.display = "block"
+                admin.style.display = "none"
+                boss.style.display = "none"
+                adminImg.style.display = "none"
+                basicImg.style.display = "block"
+                bossImg.style.display = "none"
+            }
+        }
+
+    function onLogout(){
+        localStorage.clear();
+        location.reload();
+    }
+    </script>
+</body>
+</html>
